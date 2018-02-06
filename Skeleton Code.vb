@@ -83,8 +83,14 @@ Module Module1
         Dim FileName As String
         Dim FieldRow As String
         Dim FileHandle As IO.StreamReader
+        Console.WriteLine("Your file must be in the .txt format.")
         Console.Write("Enter file name: ")
         FileName = Console.ReadLine()
+        If Right(FileName, 4) = ".txt" Then
+            FileName = FileName
+        Else
+            FileName = String.Concat(FileName, ".txt")
+        End If
         Try
             FileHandle = New IO.StreamReader(FileName)
             For Row = 0 To FIELDLENGTH - 1
