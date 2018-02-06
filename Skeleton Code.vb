@@ -3,7 +3,7 @@
 ' Made AWESOME by Viljo Wilding, 2018
 
 ' Changelog:
-' -- Version 0.1.2 Wilding
+' -- Version 0.2.0 Wilding
 '    --- Add console colours
 '    --- Create PlantFirstSeed function
 ' -- Version 0.1.1 Wilding
