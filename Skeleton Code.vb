@@ -3,6 +3,8 @@
 ' Made AWESOME by Viljo Wilding, 2018
 
 ' Changelog:
+' -- Version 0.2.1 Wilding
+''    --- Attempting to get the bloody thing to BUILD WITH TRAVIS
 ' -- Version 0.2.0 Wilding
 '    --- Add console colours
 '    --- Create PlantFirstSeed function
