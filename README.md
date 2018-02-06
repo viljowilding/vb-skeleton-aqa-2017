@@ -27,7 +27,8 @@ Function PlantFirstSeed(ByVal Field As Char(,), ByVal SeedPosition As Integer)
     Column = FIELDWIDTH \ 2
     Field(Row, Column) = SEED
     Return Field
-End Function```
+End Function
+```
 
 ### Console Colours
 
@@ -57,4 +58,5 @@ Sub Display(ByVal Field(,) As Char, ByVal Season As String, ByVal Year As Intege
         Console.WriteLine("|" & Str(Row).PadLeft(3))
     Next
     Console.WriteLine()
-End Sub```
+End Sub
+```
