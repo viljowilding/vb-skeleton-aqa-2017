@@ -71,7 +71,7 @@ Module Module1
         Dim Field(FIELDLENGTH, FIELDWIDTH) As Char
         Dim Response As String
         Console.Write("Do you want to load a file with seed positions? (Y/N): ")
-        Response = Console.ReadLine()
+        Response = UCase(Console.ReadLine())
         If Response = "Y" Then
             Field = ReadFile()
         Else
@@ -227,12 +227,10 @@ Module Module1
         If YearsToRun <> 0 Then
             Field = InitialiseField()
             If YearsToRun >= 1 Then
-                Console.WriteLine("YearsToRun >= 1")
                 For Year = 1 To YearsToRun
                     SimulateOneYear(Field, Year)
                 Next
             Else If YearsToRun = -1 Then
-                Console.WriteLine("Else")
                 Continuing = True
                 Year = 0
                 While Continuing
