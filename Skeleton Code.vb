@@ -3,6 +3,10 @@
 ' written by the AQA AS1 Programmer Team
 ' developed in the VB.Net 2008 environment
 
+' Changelog:
+' -- Version 0.1.1 Wilding
+'    --- Initial code release
+'    --- Start of changelog
 
 Imports System.IO
 
