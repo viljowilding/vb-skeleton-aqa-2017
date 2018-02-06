@@ -47,6 +47,7 @@ Module Module1
     Function CreateNewField() As Char(,)
         Dim Row As Integer
         Dim Column As Integer
+        Dim SeedPosition As Integer
         Dim Field(FIELDLENGTH, FIELDWIDTH) As Char
         Dim AmountOfRocks As Integer = 0
 
@@ -62,11 +63,11 @@ Module Module1
                 Field(Row, Column) = SOIL
             Next
         Next
-
-        Row = FIELDLENGTH \ 2
-        Column = FIELDWIDTH \ 2
-        Field(Row, Column) = SEED
-
+        
+        Console.WriteLine("Should the seed position be centre (0) or random (1)?")
+        Console.Write("0/1: ")
+        SeedPosition = Console.ReadLine()
+        Field = PlantFirstSeed(Field, SeedPosition)
         For x = 1 To AmountOfRocks 'Place rocks in the field in random positions
             Row = Int(Rnd() * FIELDLENGTH)
             Column = Int(Rnd() * FIELDWIDTH)
@@ -75,6 +76,25 @@ Module Module1
         Return Field
     End Function
 
+    Function PlantFirstSeed(ByVal Field As Char(,), ByVal SeedPosition As Integer)
+        Dim Row, Column As Integer
+        Select SeedPosition
+            Case 0:
+                Console.WriteLine("Planting seed in the centre of the field!")
+            Case 1:
+                Console.WriteLine("Planting the seed in a random location")
+                Row = Int(Rnd() * FIELDLENGTH)
+                Column = Int(Rnd() * FIELDWIDTH)
+                Field(Row, Column) = SEED
+                Return Field
+            Case Else:
+                Console.WriteLine("Invalid input, defaulting to centre position")
+        End Select
+        Row = FIELDLENGTH \ 2
+        Column = FIELDWIDTH \ 2
+        Field(Row, Column) = SEED
+        Return Field
+    End Function
 
     Function ReadFile() As Char(,)
         Dim Row As Integer
@@ -125,8 +145,20 @@ Module Module1
         Console.WriteLine("Season: " & Season & "  Year number: " & Year)
         For Row = 0 To FIELDLENGTH - 1
             For Column = 0 To FIELDWIDTH - 1
+                If Field(Row, Column) = SOIL Then
+                    Console.ForegroundColor = 6
+                Else If Field(Row, Column) = SEED Then
+                    Console.ForegroundColor = 11
+                Else If Field(Row, Column) = PLANT Then
+                    Console.ForegroundColor = 10
+                Else If Field(Row, Column) = ROCKS Then
+                    Console.ForegroundColor = 12
+                Else
+                    Console.ForegroundColor = 7
+                End If
                 Console.Write(Field(Row, Column))
             Next
+            Console.ResetColor
             Console.WriteLine("|" & Str(Row).PadLeft(3))
         Next
         Console.WriteLine()
