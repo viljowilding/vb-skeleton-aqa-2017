@@ -35,6 +35,7 @@ Module Module1
                 End If
             Catch ex As Exception
                 Console.WriteLine("That's not a number! Please try again.")
+                GetHowLongToRun(False)
             End Try
         Loop Until Valid
         Return Years
