@@ -30,9 +30,11 @@ Module Module1
             Try
                 If Years > -2 And Years < 6 Then
                     Valid = True
+                Else
+                     Console.WriteLine("Invalid input: {0} is not accepted. You may only enter a value from 0-5 or -1", Years)
                 End If
             Catch ex As Exception
-                Console.WriteLine("Invalid value entered. Please try again.")
+                Console.WriteLine("That's not a number! Please try again.")
             End Try
         Loop Until Valid
         Return Years
