@@ -44,16 +44,33 @@ Module Module1
         Dim Row As Integer
         Dim Column As Integer
         Dim Field(FIELDLENGTH, FIELDWIDTH) As Char
+        Dim AmountOfRocks As Integer = 0
+
+        Console.Write("How many rocks should be in the field: ")    'Ask user for input
+        Try                                                         'Try/Catch to ensure correct datatype
+            AmountOfRocks = Console.ReadLine()
+        Catch ex As Exception
+            Console.WriteLine("Invalid entry: simulation will continue without rocks.")
+        End Try
+
         For Row = 0 To FIELDLENGTH - 1
             For Column = 0 To FIELDWIDTH - 1
                 Field(Row, Column) = SOIL
             Next
         Next
+
         Row = FIELDLENGTH \ 2
         Column = FIELDWIDTH \ 2
         Field(Row, Column) = SEED
+
+        For x = 1 To AmountOfRocks 'Place rocks in the field in random positions
+            Row = Int(Rnd() * FIELDLENGTH)
+            Column = Int(Rnd() * FIELDWIDTH)
+            Field(Row, Column) = ROCKS
+        Next
         Return Field
     End Function
+
 
     Function ReadFile() As Char(,)
         Dim Row As Integer
