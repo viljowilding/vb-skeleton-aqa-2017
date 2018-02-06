@@ -1,7 +1,6 @@
 ' Skeleton Program for the AQA A1 Summer 2017 examination
-' this code should be used in conjunction with the Preliminary Material
-' written by the AQA AS1 Programmer Team
-' developed in the VB.Net 2008 environment
+' Originally written by the AQA AS1 Programmer Team
+' Made AWESOME by Viljo Wilding, 2018
 
 ' Changelog:
 ' -- Version 0.1.1 Wilding
