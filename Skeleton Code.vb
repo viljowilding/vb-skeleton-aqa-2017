@@ -16,6 +16,7 @@ Module Module1
 
     Function GetHowLongToRun(ByVal printHelp As Boolean) As Integer
         Dim Years As Integer
+        Dim Valid As Boolean = False
         If printHelp = True Then
             Console.WriteLine("Welcome to the Plant Growing Simulation")
             Console.WriteLine()
@@ -23,8 +24,17 @@ Module Module1
             Console.WriteLine("or run the simulation for 0 to 5 years")
             Console.WriteLine("How many years do you want the simulation to run?")
         End If
-        Console.Write("Enter a number between 0 and 5, or -1 for stepping mode: ")
-        Years = Console.ReadLine()
+        Do
+            Console.Write("Enter a number between 0 and 5, or -1 for stepping mode: ")
+            Years = Console.ReadLine()
+            Try
+                If Years > -2 And Years < 6 Then
+                    Valid = True
+                End If
+            Catch ex As Exception
+                Console.WriteLine("Invalid value entered. Please try again.")
+            End Try
+        Loop Until Valid
         Return Years
     End Function
 
