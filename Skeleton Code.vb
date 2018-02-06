@@ -26,8 +26,8 @@ Module Module1
         End If
         Do
             Console.Write("Enter a number between 0 and 5, or -1 for stepping mode: ")
-            Years = Console.ReadLine()
             Try
+                Years = Console.ReadLine()
                 If Years > -2 And Years < 6 Then
                     Valid = True
                 Else
