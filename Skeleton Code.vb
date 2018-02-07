@@ -55,6 +55,7 @@ Module Module1
         Dim SeedPosition As Integer
         Dim Field(FIELDLENGTH, FIELDWIDTH) As Char
         Dim AmountOfRocks As Integer = 0
+        Dim x As Integer
 
         Console.Write("How many rocks should be in the field: ")    'Ask user for input
         Try                                                         'Try/Catch to ensure correct datatype
@@ -189,6 +190,7 @@ Module Module1
     End Sub
 
     Function SimulateSpring(ByVal Field As Char(,)) As Char(,)
+        Dim Row, Column As Integer
         Dim Frost As Boolean
         Dim PlantCount As Integer
         For Row = 0 To FIELDLENGTH - 1
@@ -223,6 +225,7 @@ Module Module1
     End Function
 
     Function SimulateSummer(ByVal Field(,) As Char) As Char(,)
+        Dim Row, Column As Integer
         Dim RainFall As Integer
         Dim PlantCount As Integer
         RainFall = Int(Rnd() * 3)
@@ -254,6 +257,7 @@ Module Module1
     End Function
 
     Function SimulateAutumn(ByVal Field(,) As Char) As Char(,)
+        Dim Row, Column As Integer
         For Row = 0 To FIELDLENGTH - 1
             For Column = 0 To FIELDWIDTH - 1
                 If Field(Row, Column) = PLANT Then
@@ -272,6 +276,7 @@ Module Module1
     End Function
 
     Function SimulateWinter(ByVal Field As Char(,)) As Char(,)
+        Dim Row, Column As Integer
         For Row = 0 To FIELDLENGTH - 1
             For Column = 0 To FIELDWIDTH - 1
                 If Field(Row, Column) = PLANT Then
