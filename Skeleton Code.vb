@@ -3,14 +3,16 @@
 ' Made AWESOME by Viljo Wilding, 2018
 
 ' Changelog:
+' -- Version 0.2.2 Wilding
+'    --- Switched build system to AppVeyor; builds succesfully.
 ' -- Version 0.2.1 Wilding
-''    --- Attempting to get the bloody thing to BUILD WITH TRAVIS
+''    --- Attempting to get the bloody thing build with Travis-CI.
 ' -- Version 0.2.0 Wilding
-'    --- Add console colours
-'    --- Create PlantFirstSeed function
+'    --- Add console colours.
+'    --- Create PlantFirstSeed function.
 ' -- Version 0.1.1 Wilding
-'    --- Initial code release
-'    --- Start of changelog
+'    --- Initial code release.
+'    --- Start of changelog.
 
 Imports System.IO
 
