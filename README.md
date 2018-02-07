@@ -1,6 +1,6 @@
 # AQA 2017 P1 Skeleton Code - VB.NET
 
-[![Build Status](https://travis-ci.org/viljowilding/vb-skeleton-aqa-2017.svg?branch=master)](https://travis-ci.org/viljowilding/vb-skeleton-aqa-2017)
+[![Build Status](https://ci.appveyor.com/api/projects/status/github/viljowilding/vb-skeleton-aqa-2017?svg=true)](https://ci.appveyor.com/api/projects/status/github/viljowilding/vb-skeleton-aqa-2017)
 
 This repository holds a modified version of the **AQA 2017 Skeleton Code** in VB.NET, improved as per the task. When I figure out how GitHub releases work, I'll probably create releases when new features are added!
 
