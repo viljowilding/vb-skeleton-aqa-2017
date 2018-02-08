@@ -72,8 +72,7 @@ Module Module1
             Next
         Next
         
-        Console.WriteLine("Should the seed position be centre (0) or random (1)?")
-        Console.Write("0/1: ")
+        Console.Write("Should the seed position be centre (0) or random (1)? 0/1: ")
         SeedPosition = Console.ReadLine()
         Field = PlantFirstSeed(Field, SeedPosition)
         For x = 1 To AmountOfRocks 'Place rocks in the field in random positions
@@ -84,7 +83,47 @@ Module Module1
         Return Field
     End Function
 
-    Function PlantFirstSeed(ByVal Field As Char(,), ByVal SeedPosition As Integer)
+    Sub SaveToFile(ByVal Field As Char(,))
+        Dim Row, Column As Integer
+        Dim ToSave As Boolean = False
+        Dim Save As String
+        Dim FileName As String
+        Dim FileHandler As IO.StreamWriter
+        Do
+            Console.Write("Do you want to save the file? Y/N: ")
+            Save = UCase(Console.ReadLine())
+            If Save = "Y" Then
+                ToSave = True
+                Console.Write("Please enter the file name: ")
+                FileName = Console.ReadLine()
+                If Right(FileName, 4) = ".txt" Then
+                    FileName = FileName
+                Else
+                    FileName = String.Concat(FileName, ".txt")
+                End If
+                Try
+                    FileHandler = New IO.StreamWriter(FileName)
+                    For Row = 0 To FIELDLENGTH - 1
+                        For Column = 0 To FIELDWIDTH - 1
+                            FileHandler.Write(Field(Row, Column))
+                        Next
+                    Next
+                    FileHandler.Close()
+                Catch ex As Exception
+                    Console.WriteLine("An error occured whilst writing the file; the program will now exit.")
+                    Console.WriteLine(ex)
+                End Try
+            Else If Save = "N" Then
+                ToSave = True
+            Else
+                Console.WriteLine("Invalid input, please try again.")
+            End If
+        Loop Until ToSave = True
+        Console.WriteLine("The program will now exit.")
+        Console.ReadLine()
+    End Sub
+
+    Function PlantFirstSeed(ByVal Field As Char(,), ByVal SeedPosition As Integer) As Char(,)
         Dim Row, Column As Integer
         Select SeedPosition
             Case 0:
@@ -191,7 +230,7 @@ Module Module1
         End If
     End Sub
 
-    Function SimulateSpring(ByVal Field As Char(,)) As Char(,)
+    Function SimulateSpring(ByVal Field(,) As Char) As Char(,)
         Dim Row, Column As Integer
         Dim Frost As Boolean
         Dim PlantCount As Integer
@@ -330,6 +369,7 @@ Module Module1
                 Simulation(False)
             End If
             Console.WriteLine("End of Simulation")
+            SaveToFile(Field)
         End If
         Console.ReadLine()
     End Sub
