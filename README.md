@@ -1,5 +1,7 @@
 # AQA 2017 P1 Skeleton Code - VB.NET
 
+[![Build status](https://ci.appveyor.com/api/projects/status/51i1ik4sux8rwg7d?svg=true)](https://ci.appveyor.com/project/viljowilding/vb-skeleton-aqa-2017)
+
 This repository holds a modified version of the **AQA 2017 Skeleton Code** in VB.NET, improved as per the task. When I figure out how GitHub releases work, I'll probably create releases when new features are added!
 
 ## Stuff to note
@@ -27,7 +29,8 @@ Function PlantFirstSeed(ByVal Field As Char(,), ByVal SeedPosition As Integer)
     Column = FIELDWIDTH \ 2
     Field(Row, Column) = SEED
     Return Field
-End Function```
+End Function
+```
 
 ### Console Colours
 
@@ -57,4 +60,52 @@ Sub Display(ByVal Field(,) As Char, ByVal Season As String, ByVal Year As Intege
         Console.WriteLine("|" & Str(Row).PadLeft(3))
     Next
     Console.WriteLine()
-End Sub```
+End Sub
+```
+
+### SaveToFile
+
+Damn, I spoil you! The new `Sub SaveToFile` allows the user to save their field at the end of the simulation to a file. This has validation to ensure that users aren't users, and will be run at the end of the simulation.
+
+```VB.NET
+Sub SaveToFile(ByVal Field As Char(,))
+    Dim Row, Column As Integer
+    Dim ToSave As Boolean = False
+    Dim Save, FileName, RowEnding As String
+    Dim FileHandler As IO.StreamWriter
+    Do
+        Console.Write("Do you want to save the file? Y/N: ")
+        Save = UCase(Console.ReadLine())
+        If Save = "Y" Then
+            ToSave = True
+            Console.Write("Please enter the file name: ")
+            FileName = Console.ReadLine()
+            If Right(FileName, 4) = ".txt" Then
+                FileName = FileName
+            Else
+                FileName = String.Concat(FileName, ".txt")
+            End If
+            Try
+                FileHandler = New IO.StreamWriter(FileName)
+                For Row = 0 To FIELDLENGTH - 1
+                    For Column = 0 To FIELDWIDTH - 1
+                        FileHandler.Write(Field(Row, Column))
+                    Next
+                    RowEnding = String.Format("| {0}", Row)
+                    FileHandler.Write(RowEnding)
+                    FileHandler.WriteLine()
+                Next
+                FileHandler.Close()
+            Catch ex As Exception
+                Console.WriteLine("An error occured whilst writing the file; the program will now exit.")
+                Console.WriteLine(ex)
+            End Try
+        Else If Save = "N" Then
+            ToSave = True
+        Else
+            Console.WriteLine("Invalid input, please try again.")
+        End If
+    Loop Until ToSave = True
+    Console.WriteLine("The program will now exit.")
+End Sub
+```

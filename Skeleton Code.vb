@@ -3,9 +3,18 @@
 ' Made AWESOME by Viljo Wilding, 2018
 
 ' Changelog:
+' -- Version 0.2.3 Wilding
+'    --- Added a sub to save the resulting field to a file.
+' -- Version 0.2.2 Wilding
+'    --- Switched build system to AppVeyor; builds succesfully.
+' -- Version 0.2.1 Wilding
+''    --- Attempting to get the bloody thing build with Travis-CI.
+' -- Version 0.2.0 Wilding
+'    --- Add console colours.
+'    --- Create PlantFirstSeed function.
 ' -- Version 0.1.1 Wilding
-'    --- Initial code release
-'    --- Start of changelog
+'    --- Initial code release.
+'    --- Start of changelog.
 
 Imports System.IO
 
@@ -50,6 +59,7 @@ Module Module1
         Dim SeedPosition As Integer
         Dim Field(FIELDLENGTH, FIELDWIDTH) As Char
         Dim AmountOfRocks As Integer = 0
+        Dim x As Integer
 
         Console.Write("How many rocks should be in the field: ")    'Ask user for input
         Try                                                         'Try/Catch to ensure correct datatype
@@ -64,8 +74,7 @@ Module Module1
             Next
         Next
         
-        Console.WriteLine("Should the seed position be centre (0) or random (1)?")
-        Console.Write("0/1: ")
+        Console.Write("Should the seed position be centre (0) or random (1)? 0/1: ")
         SeedPosition = Console.ReadLine()
         Field = PlantFirstSeed(Field, SeedPosition)
         For x = 1 To AmountOfRocks 'Place rocks in the field in random positions
@@ -76,7 +85,48 @@ Module Module1
         Return Field
     End Function
 
-    Function PlantFirstSeed(ByVal Field As Char(,), ByVal SeedPosition As Integer)
+    Sub SaveToFile(ByVal Field As Char(,))
+        Dim Row, Column As Integer
+        Dim ToSave As Boolean = False
+        Dim Save, FileName, RowEnding As String
+        Dim FileHandler As IO.StreamWriter
+        Do
+            Console.Write("Do you want to save the file? Y/N: ")
+            Save = UCase(Console.ReadLine())
+            If Save = "Y" Then
+                ToSave = True
+                Console.Write("Please enter the file name: ")
+                FileName = Console.ReadLine()
+                If Right(FileName, 4) = ".txt" Then
+                    FileName = FileName
+                Else
+                    FileName = String.Concat(FileName, ".txt")
+                End If
+                Try
+                    FileHandler = New IO.StreamWriter(FileName)
+                    For Row = 0 To FIELDLENGTH - 1
+                        For Column = 0 To FIELDWIDTH - 1
+                            FileHandler.Write(Field(Row, Column))
+                        Next
+                        RowEnding = String.Format("| {0}", Row)
+                        FileHandler.Write(RowEnding)
+                        FileHandler.WriteLine()
+                    Next
+                    FileHandler.Close()
+                Catch ex As Exception
+                    Console.WriteLine("An error occured whilst writing the file; the program will now exit.")
+                    Console.WriteLine(ex)
+                End Try
+            Else If Save = "N" Then
+                ToSave = True
+            Else
+                Console.WriteLine("Invalid input, please try again.")
+            End If
+        Loop Until ToSave = True
+        Console.WriteLine("The program will now exit.")
+    End Sub
+
+    Function PlantFirstSeed(ByVal Field As Char(,), ByVal SeedPosition As Integer) As Char(,)
         Dim Row, Column As Integer
         Select SeedPosition
             Case 0:
@@ -183,7 +233,8 @@ Module Module1
         End If
     End Sub
 
-    Function SimulateSpring(ByVal Field As Char(,)) As Char(,)
+    Function SimulateSpring(ByVal Field(,) As Char) As Char(,)
+        Dim Row, Column As Integer
         Dim Frost As Boolean
         Dim PlantCount As Integer
         For Row = 0 To FIELDLENGTH - 1
@@ -218,6 +269,7 @@ Module Module1
     End Function
 
     Function SimulateSummer(ByVal Field(,) As Char) As Char(,)
+        Dim Row, Column As Integer
         Dim RainFall As Integer
         Dim PlantCount As Integer
         RainFall = Int(Rnd() * 3)
@@ -249,6 +301,7 @@ Module Module1
     End Function
 
     Function SimulateAutumn(ByVal Field(,) As Char) As Char(,)
+        Dim Row, Column As Integer
         For Row = 0 To FIELDLENGTH - 1
             For Column = 0 To FIELDWIDTH - 1
                 If Field(Row, Column) = PLANT Then
@@ -267,6 +320,7 @@ Module Module1
     End Function
 
     Function SimulateWinter(ByVal Field As Char(,)) As Char(,)
+        Dim Row, Column As Integer
         For Row = 0 To FIELDLENGTH - 1
             For Column = 0 To FIELDWIDTH - 1
                 If Field(Row, Column) = PLANT Then
@@ -318,6 +372,7 @@ Module Module1
                 Simulation(False)
             End If
             Console.WriteLine("End of Simulation")
+            SaveToFile(Field)
         End If
         Console.ReadLine()
     End Sub
