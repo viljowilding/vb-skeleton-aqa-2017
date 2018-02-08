@@ -3,6 +3,8 @@
 ' Made AWESOME by Viljo Wilding, 2018
 
 ' Changelog:
+' -- Version 0.2.3 Wilding
+'    --- Added a sub to save the resulting field to a file.
 ' -- Version 0.2.2 Wilding
 '    --- Switched build system to AppVeyor; builds succesfully.
 ' -- Version 0.2.1 Wilding
@@ -86,8 +88,7 @@ Module Module1
     Sub SaveToFile(ByVal Field As Char(,))
         Dim Row, Column As Integer
         Dim ToSave As Boolean = False
-        Dim Save As String
-        Dim FileName As String
+        Dim Save, FileName, RowEnding As String
         Dim FileHandler As IO.StreamWriter
         Do
             Console.Write("Do you want to save the file? Y/N: ")
@@ -107,6 +108,9 @@ Module Module1
                         For Column = 0 To FIELDWIDTH - 1
                             FileHandler.Write(Field(Row, Column))
                         Next
+                        RowEnding = String.Format("| {0}", Row)
+                        FileHandler.Write(RowEnding)
+                        FileHandler.WriteLine()
                     Next
                     FileHandler.Close()
                 Catch ex As Exception
@@ -120,7 +124,6 @@ Module Module1
             End If
         Loop Until ToSave = True
         Console.WriteLine("The program will now exit.")
-        Console.ReadLine()
     End Sub
 
     Function PlantFirstSeed(ByVal Field As Char(,), ByVal SeedPosition As Integer) As Char(,)
