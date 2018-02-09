@@ -56,7 +56,7 @@ Module Module1
     Function CreateNewField() As Char(,)
         Dim Row As Integer
         Dim Column As Integer
-        Dim SeedPosition As Char
+        Dim SeedPosition As Integer
         Dim Field(FIELDLENGTH, FIELDWIDTH) As Char
         Dim AmountOfRocks As Integer = 0
         Dim x As Integer
@@ -74,21 +74,17 @@ Module Module1
             Next
         Next
         
-        Console.Write("Should the seed position be centre (C), random (R), or at specific coordinates (S)? C/R/S: ")
+        Console.Write("Should the seed position be centre (0) or random (1)? 0/1: ")
         SeedPosition = Console.ReadLine()
         Field = PlantFirstSeed(Field, SeedPosition)
-        For x = 1 To AmountOfRocks
+        For x = 1 To AmountOfRocks 'Place rocks in the field in random positions
             Row = Int(Rnd() * FIELDLENGTH)
             Column = Int(Rnd() * FIELDWIDTH)
-            If Field(Row, Column) = SOIL Then
-                Field(Row, Column) = ROCKS
-            Else
-                Console.WriteLine("Rock #{0} wasn't placed as it would have replaced the seed!", x)
-            End If
+            Field(Row, Column) = ROCKS
         Next
         Return Field
     End Function
-
+    
     Sub SaveToFile(ByVal Field As Char(,))
         Dim Row, Column As Integer
         Dim ToSave As Boolean = False
@@ -130,37 +126,15 @@ Module Module1
         Console.WriteLine("The program will now exit.")
     End Sub
 
-    Function PlantFirstSeed(ByVal Field As Char(,), ByVal SeedPosition As Char) As Char(,)
+    Function PlantFirstSeed(ByVal Field As Char(,), ByVal SeedPosition As Integer) As Char(,)
         Dim Row, Column As Integer
-        Dim RowValid, ColumnValid As Boolean
         Select SeedPosition
-            Case "C":
+            Case 0:
                 Console.WriteLine("Planting seed in the centre of the field!")
-            Case "R":
+            Case 1:
                 Console.WriteLine("Planting the seed in a random location")
                 Row = Int(Rnd() * FIELDLENGTH)
                 Column = Int(Rnd() * FIELDWIDTH)
-                Field(Row, Column) = SEED
-                Return Field
-            Case "S":
-                Do
-                    Console.Write("Enter the X coordinate: ")
-                    Row = Console.ReadLine()
-                    If Row >= 0 And Row <= FIELDWIDTH Then
-                        RowValid = True
-                    Else
-                        Console.WriteLine("Invalid input, please try again.")
-                    End If
-                Loop Until RowValid = True
-                Do
-                    Console.Write("Enter the Y coordinate: ")
-                    Column = Console.ReadLine()
-                    If Column >= 0 And Column <= FIELDLENGTH Then
-                        ColumnValid = True
-                    Else
-                        Console.WriteLine("Invalid input, please try again.")
-                    End If
-                Loop Until ColumnValid = True
                 Field(Row, Column) = SEED
                 Return Field
             Case Else:
