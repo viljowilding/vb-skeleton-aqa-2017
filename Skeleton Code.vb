@@ -84,7 +84,7 @@ Module Module1
         Next
         Return Field
     End Function
-
+    
     Sub SaveToFile(ByVal Field As Char(,))
         Dim Row, Column As Integer
         Dim ToSave As Boolean = False
