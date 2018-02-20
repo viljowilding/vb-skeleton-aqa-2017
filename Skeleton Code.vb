@@ -194,7 +194,11 @@ Module Module1
     Sub Display(ByVal Field(,) As Char, ByVal Season As String, ByVal Year As Integer)
         Dim Row As Integer
         Dim Column As Integer
-        Console.WriteLine("Season: " & Season & "  Year number: " & Year)
+        If Season = "S" Then
+            Console.WriteLine("Field at the start of simulation")
+        Else
+            Console.WriteLine("Season: " & Season & "  Year number: " & Year)
+        End If
         For Row = 0 To FIELDLENGTH - 1
             For Column = 0 To FIELDWIDTH - 1
                 If Field(Row, Column) = SOIL Then
@@ -355,6 +359,7 @@ Module Module1
             Field = InitialiseField()
             If YearsToRun >= 1 Then
                 For Year = 1 To YearsToRun
+                    Display(Field, "S", Year)
                     SimulateOneYear(Field, Year)
                 Next
             Else If YearsToRun = -1 Then
@@ -362,6 +367,7 @@ Module Module1
                 Year = 0
                 While Continuing
                     Year += 1
+                    Display(Field, "S", Year)
                     SimulateOneYear(Field, Year)
                     Console.Write("Press Enter to run simulation for another Year, Input X to stop: ")
                     Response = Console.ReadLine()
