@@ -3,15 +3,18 @@
 ' Made AWESOME by Viljo Wilding, 2018
 
 ' Changelog:
-' -- Version 1.0.0 Wilding
+' -- Version 1.0.1
+'    --- Display seed at the start of the simulation
+' -- Version 1.0.0
 '    --- It's stable enough to have a stable release.
-' -- Version 0.2.3 Wilding
+'    --- Actual features changed in this release.
+' -- Version 0.2.3
 '    --- Added a sub to save the resulting field to a file.
-' -- Version 0.2.2 Wilding
+' -- Version 0.2.2
 '    --- Switched build system to AppVeyor; builds succesfully.
-' -- Version 0.2.1 Wilding
+' -- Version 0.2.1
 '    --- Attempting to get the bloody thing build with Travis-CI.
-' -- Version 0.2.0 Wilding
+' -- Version 0.2.0
 '    --- Add console colours.
 '    --- Create PlantFirstSeed function.
 ' -- Version 0.1.1 Wilding
@@ -194,7 +197,11 @@ Module Module1
     Sub Display(ByVal Field(,) As Char, ByVal Season As String, ByVal Year As Integer)
         Dim Row As Integer
         Dim Column As Integer
-        Console.WriteLine("Season: " & Season & "  Year number: " & Year)
+        If Season = "S" Then
+            Console.WriteLine("Field at the start of simulation")
+        Else
+            Console.WriteLine("Season: " & Season & "  Year number: " & Year)
+        End If
         For Row = 0 To FIELDLENGTH - 1
             For Column = 0 To FIELDWIDTH - 1
                 If Field(Row, Column) = SOIL Then
@@ -355,6 +362,7 @@ Module Module1
             Field = InitialiseField()
             If YearsToRun >= 1 Then
                 For Year = 1 To YearsToRun
+                    Display(Field, "S", Year)
                     SimulateOneYear(Field, Year)
                 Next
             Else If YearsToRun = -1 Then
@@ -362,6 +370,7 @@ Module Module1
                 Year = 0
                 While Continuing
                     Year += 1
+                    Display(Field, "S", Year)
                     SimulateOneYear(Field, Year)
                     Console.Write("Press Enter to run simulation for another Year, Input X to stop: ")
                     Response = Console.ReadLine()
