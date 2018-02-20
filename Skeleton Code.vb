@@ -61,7 +61,7 @@ Module Module1
     Function CreateNewField() As Char(,)
         Dim Row As Integer
         Dim Column As Integer
-        Dim SeedPosition As Integer
+        Dim SeedPosition As Char
         Dim Field(FIELDLENGTH, FIELDWIDTH) As Char
         Dim AmountOfRocks As Integer = 0
         Dim x As Integer
