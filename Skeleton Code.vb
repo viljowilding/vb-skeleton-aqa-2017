@@ -3,12 +3,14 @@
 ' Made AWESOME by Viljo Wilding, 2018
 
 ' Changelog:
+' -- Version 1.0.0 Wilding
+'    --- It's stable enough to have a stable release.
 ' -- Version 0.2.3 Wilding
 '    --- Added a sub to save the resulting field to a file.
 ' -- Version 0.2.2 Wilding
 '    --- Switched build system to AppVeyor; builds succesfully.
 ' -- Version 0.2.1 Wilding
-''    --- Attempting to get the bloody thing build with Travis-CI.
+'    --- Attempting to get the bloody thing build with Travis-CI.
 ' -- Version 0.2.0 Wilding
 '    --- Add console colours.
 '    --- Create PlantFirstSeed function.
