@@ -131,15 +131,37 @@ Module Module1
         Console.WriteLine("The program will now exit.")
     End Sub
 
-    Function PlantFirstSeed(ByVal Field As Char(,), ByVal SeedPosition As Integer) As Char(,)
+    Function PlantFirstSeed(ByVal Field As Char(,), ByVal SeedPosition As Char) As Char(,)
         Dim Row, Column As Integer
+        Dim RowValid, ColumnValid As Boolean
         Select SeedPosition
-            Case 0:
+            Case "C":
                 Console.WriteLine("Planting seed in the centre of the field!")
-            Case 1:
+            Case "R":
                 Console.WriteLine("Planting the seed in a random location")
                 Row = Int(Rnd() * FIELDLENGTH)
                 Column = Int(Rnd() * FIELDWIDTH)
+                Field(Row, Column) = SEED
+                Return Field
+            Case "S":
+                Do
+                    Console.Write("Enter the X coordinate: ")
+                    Row = Console.ReadLine()
+                    If Row >= 0 And Row <= FIELDWIDTH Then
+                        RowValid = True
+                    Else
+                        Console.WriteLine("Invalid input, please try again.")
+                    End If
+                Loop Until RowValid = True
+                Do
+                    Console.Write("Enter the Y coordinate: ")
+                    Column = Console.ReadLine()
+                    If Column >= 0 And Column <= FIELDLENGTH Then
+                        ColumnValid = True
+                    Else
+                        Console.WriteLine("Invalid input, please try again.")
+                    End If
+                Loop Until ColumnValid = True
                 Field(Row, Column) = SEED
                 Return Field
             Case Else:
