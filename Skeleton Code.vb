@@ -221,14 +221,15 @@ Module Module1
     Sub Display(ByVal Field(,) As Char, ByVal Season As String, ByVal Year As Integer)
         Dim Row As Integer
         Dim Column As Integer
-        Dim alphabet As String = "abcdefghijklmnopqrstuvwxyzABCDEFGHI"
+        Dim Alphabet As String = "abcdefghijklmnopqrstuvwxyzABCDEFGHI"
+        Dim Letter
         If Season = "S" Then
             Console.WriteLine("Field at the start of simulation")
         Else
             Console.WriteLine("Season: " & Season & "  Year number: " & Year)
         End If
-        For Each letter In alphabet
-            Console.Write(letter)
+        For Each Letter In Alphabet
+            Console.Write(Letter)
         Next
         Console.WriteLine()
         For Column = 0 To FIELDWIDTH - 1
