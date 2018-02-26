@@ -3,6 +3,8 @@
 ' Made AWESOME by Viljo Wilding, 2018
 
 ' Changelog:
+' -- Version 1.1.0
+'    --- Add column IDs!
 ' -- Version 1.0.1
 '    --- Display seed at the start of the simulation
 ' -- Version 1.0.0
