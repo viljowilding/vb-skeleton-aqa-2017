@@ -79,7 +79,7 @@ Module Module1
             Next
         Next
         
-        Console.Write("Should the seed position be the centre (C), random (R), or do you wish to select (S) it? C/S/R: ")
+        Console.Write("Should the seed position be centre (0) or random (1)? 0/1: ")
         SeedPosition = Console.ReadLine()
         Field = PlantFirstSeed(Field, SeedPosition)
         For x = 1 To AmountOfRocks 'Place rocks in the field in random positions
@@ -219,20 +219,11 @@ Module Module1
     Sub Display(ByVal Field(,) As Char, ByVal Season As String, ByVal Year As Integer)
         Dim Row As Integer
         Dim Column As Integer
-        Dim alphabet As String = "abcdefghijklmnopqrstuvwxyzABCDEFGHI"
         If Season = "S" Then
             Console.WriteLine("Field at the start of simulation")
         Else
             Console.WriteLine("Season: " & Season & "  Year number: " & Year)
         End If
-        For Each letter In alphabet
-            Console.Write(letter)
-        Next
-        Console.WriteLine()
-        For Column = 0 To FIELDWIDTH - 1
-            Console.Write("_")
-        Next
-        Console.WriteLine()
         For Row = 0 To FIELDLENGTH - 1
             For Column = 0 To FIELDWIDTH - 1
                 If Field(Row, Column) = SOIL Then
