@@ -13,7 +13,7 @@ Module QueueAndStack
 	End Sub
 	Sub Init()
 		Dim sel As Integer
-		Console.WriteLine("Initialising data STORAGE...")
+		Console.WriteLine("Initialising STORAGE...")
 		Console.WriteLine("Stack (0) or Queue (1)?")
 		Console.WriteLine()
 		Console.Write("Select: ")
